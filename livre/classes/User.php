@@ -1,24 +1,41 @@
 <?php
 require_once "Database.php";
 
-class User {
+class User
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = Database::getInstance()->getConnection();
     }
 
-    public function register($username, $email, $password) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-        return $stmt->execute([
-            ':username' => htmlspecialchars($username),
-            ':email' => htmlspecialchars($email),
-            ':password' => $hashedPassword
-        ]);
+    public function register($username, $email, $password)
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT 1 FROM users WHERE username = :username UNION SELECT 1 FROM users WHERE email = :email");
+            $stmt->execute([':username' => $username, ':email' => $email]);
+
+            if ($stmt->fetch()) {
+                return false;
+            }
+
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+
+            return $stmt->execute([
+                ':username' => htmlspecialchars($username),
+                ':email' => htmlspecialchars($email),
+                ':password' => $hashedPassword
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,14 +48,15 @@ class User {
         return false;
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
         header("Location: index.php");
         exit;
     }
 
-    public function isLoggedIn() {
+    public function isLoggedIn()
+    {
         return isset($_SESSION['user_id']);
     }
 }
-?>
