@@ -10,6 +10,13 @@ class User
         $this->conn = Database::getInstance()->getConnection();
     }
 
+    public function getUserById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
     public function register($username, $email, $password)
     {
         try {
@@ -48,6 +55,21 @@ class User
         return false;
     }
 
+
+    
+    public function updateUser($id, $username, $email)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");
+            return $stmt->execute([
+                ':username' => htmlspecialchars($username),
+                ':email' => htmlspecialchars($email),
+                ':id' => $id
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
     public function logout()
     {
         session_destroy();
