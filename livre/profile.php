@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once "session.php";
 require_once "classes/User.php";
 
 if (!isset($_SESSION['user_id'])) {
@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user = new User();
 $userData = $user->getUserById($_SESSION['user_id']);
+$user_id = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"])) {
     if ($user->updateUser($_SESSION['user_id'], $_POST["username"], $_POST["email"])) {
@@ -27,6 +28,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
     <title>Profil</title>
 </head>
 <body>
+
+<header>
+        <nav>
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+                <?php if ($user->isLoggedIn()) { ?>
+                    <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
+                    <li><a href="guestbook.php">Livre d'or</a></li>
+
+                <?php
+                } else {
+                ?>
+                    <li><a href="login.php">Se connecter</a></li>
+                    <li><a href="register.php">S'inscrire</a></li>
+                <?php } ?>
+            </ul>
+        </nav>
+    </header>
+
     <h1>Profil</h1>
     <?php if (isset($success)) echo "<p style='color:green;'>$success</p>"; ?>
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>

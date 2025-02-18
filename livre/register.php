@@ -1,9 +1,13 @@
 <?php
-session_start();
+include_once "session.php";
 require_once "classes/User.php";
 
 $user = new User();
 
+if(!isset($_SESSION['username']))
+{
+    header('Location: guestbook.php');
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
     if ($user->register($_POST["username"], $_POST["email"], $_POST["password"])) {
         header("Location: login.php");
@@ -20,6 +24,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
     <title>Inscription</title>
 </head>
 <body>
+<header>
+        <nav>
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+                <?php if ($user->isLoggedIn()) { ?>
+                    <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
+                    <li><a href="guestbook.php">Livre d'or</a></li>
+
+                <?php
+                } else {
+                ?>
+                    <li><a href="login.php">Se connecter</a></li>
+                    <li><a href="register.php">S'inscrire</a></li>
+                <?php } ?>
+            </ul>
+        </nav>
+    </header>
     <h1>Inscription</h1>
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     <form method="POST">

@@ -22,10 +22,18 @@ class Guestbook {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     public function getMessageById($id) {
         $stmt = $this->conn->prepare("SELECT * FROM guestbook WHERE id = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getMessagesByMessageContent($searchTerm) {
+        $sql = "SELECT g.*, u.username FROM guestbook g LEFT JOIN users u ON g.user_id = u.id WHERE g.message LIKE :searchTerm ORDER BY g.created_at DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':searchTerm' => '%' . $searchTerm . '%']); 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function updateMessage($id, $message, $user_id) {
