@@ -9,7 +9,6 @@ $conn = Database::getInstance()->getConnection();
 $guestbook = new Guestbook();
 $reply = new Reply();
 $user = new User();
-$user_id = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["message"])) {
     $guestbook->addMessage($_POST["name"], $_POST["message"], $user_id);
@@ -18,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["message"])) {
 }
 
 $messages = $guestbook->getMessages();
-if($_GET['search'])
+if(isset($_GET['search']))
 {
     $searchTerm = $_GET['search'];
 }
