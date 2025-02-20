@@ -380,3 +380,123 @@ table a {
 table a:hover {
   text-decoration: underline;
 }
+#navbar-toggle {
+  display: none;
+}
+
+.navbar-menu
+{
+  display: none;
+}
+
+/* Add these styles to style.css */
+
+/* Hide the checkbox input */
+.menu-toggle {
+  display: none;
+}
+
+/* Style the hamburger menu */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Hide the mobile menu by default */
+.nav.mobile .nav-list {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: var(--primary);
+  border-top: 1px solid rgba(255, 209, 220, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Show the mobile menu when the checkbox is checked */
+.menu-toggle:checked + .hamburger + .nav-list {
+  display: flex;
+}
+
+/* Rotate the bars to form an "X" when the menu is open */
+.menu-toggle:checked + .hamburger .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle:checked + .hamburger .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle:checked + .hamburger .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Additional styles for mobile menu items */
+.nav.mobile .nav-list li {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.nav.mobile .nav-list li a {
+  width: 100%;
+  display: block;
+  padding: 10px 0;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.nav.mobile .nav-list li a:hover {
+  background-color: var(--secondary);
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  /* Show mobile navigation on mobile */
+  .nav.mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  /* Hide desktop navigation on mobile */
+  .nav.desktop {
+      display: none;
+  }
+}
+
+
+@media (max-width: 576px)
+ {
+  .mobile
+  {
+    display: block;
+  }
+  .desktop
+  {
+    display: none;
+  }
+ }
