@@ -12,10 +12,13 @@ $user = new User();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["message"])) {
     $guestbook->addMessage($_POST["name"], $_POST["message"], $user_id);
-    header("Location: guestbook.php");
+    header("Location: guestbook2.php");
     exit;
 }
-
+if($_SESSION['user_id'])
+{
+    $user_id = $_SESSION['user_id'];
+}
 $messages = $guestbook->getMessages();
 if(isset($_GET['search']))
 {
@@ -36,55 +39,48 @@ if ($searchTerm) {
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
-    <title>Livre d'or</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livre d'or - Mariage de Conte Fées</title>
+    <link rel="stylesheet" href="style/commentaire.css">
 </head>
-
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <?php if ($user->isLoggedIn()) { ?>
-                    <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
-                    <li><a href="guestbook.php">Livre d'or</a></li>
-
-                <?php
-                } else {
-                ?>
-                    <li><a href="login.php">Se connecter</a></li>
-                    <li><a href="register.php">S'inscrire</a></li>
-                <?php } ?>
-            </ul>
-        </nav>
-    </header>
-    <h1>Livre d'or</h1>
-    <h2>Rechercher un message</h2>
-    <form method="GET">
-        <input type="text" name="search" placeholder="Rechercher un message">
-        <button type="submit">Rechercher</button>
-    </form>
-
-
-    <h2>Messages</h2>
-    <?php foreach ($messages as $msg) { ?>
-        <h3><?= htmlspecialchars($msg["name"] ?? $msg["username"]) ?> (<?= $msg["created_at"] ?>) :</h3>
-        <p><?= nl2br(htmlspecialchars($msg["message"])) ?></p>
-        <a href="reply.php?guestbook_id=<?= $msg['id'] ?>">Répondre</a>
-
-        <?php
-        $replies = $reply->getReplies($msg['id']);
-        foreach ($replies as $reply) {
-        ?>
-            <div style="margin-left: 20px;">
-                <p><strong><?= htmlspecialchars($reply["username"]) ?></strong> (<?= $reply["created_at"] ?>) :</p>
-                <p><?= nl2br(htmlspecialchars($reply["message"])) ?></p>
+    <div class="container">
+        <div class="header">
+            <div class="decorative-line">
+                <span>✧</span>
+                <span>❋</span>
+                <span>✧</span>
             </div>
-        <?php } ?>
-        <hr>
-    <?php } ?>
+            <h1>Livre d'or</h1>
+            <h2>Mariage de Conte Fées</h2>
+            <div class="date">22.7.2025</div>
+            <div class="decorative-line">
+                <span>✧</span>
+                <span>❋</span>
+                <span>✧</span>
+            </div>
+        </div>
+        
+        <div class="content-box message">
+            <h3 class="page-title">Laissez un message féerique</h3>
+            
+            <a href="addMessage.php?id=<?= $user_id ?>">Écrire un message</a>
+        </div>
+        
+        <div class="messages">
+            <h3 class="page-title">Messages des invités</h3>
+            
+            <?php foreach ($messages as $msg) { ?>
+                <div class="message">
+                    <div class="message-header">
+                        <p>De <?= htmlspecialchars($msg["firstname"]) ?> <?= htmlspecialchars($msg["lastname"]) ?><span class="message-date"><?= $msg["created_at"] ?></span></p>
+                    </div>
+                    <p><?= nl2br(htmlspecialchars($msg["message"])) ?></p>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 </body>
-
 </html>

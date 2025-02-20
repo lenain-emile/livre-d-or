@@ -5,7 +5,7 @@ require_once "classes/User.php";
 $user = new User();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
-    if ($user->register($_POST["username"], $_POST["email"], $_POST["password"])) {
+    if ($user->register($_POST["username"], $_POST["email"], $_POST['firstname'], $_POST['lastname'], $_POST["password"])) {
         header("Location: login.php");
         exit;
     } else {
@@ -38,10 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
             </ul>
             
             <h2 class="connexion-title">Inscription</h2>
-            <?php if (isset($error)) echo "<p>$error</p>"; ?>            
+            <?php if (isset($error)) echo "<p>$error</p>"; ?>   
+            <?php var_dump($_POST);?>
             <form method="POST">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="firstname" placeholder="Prénom" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="lastname" placeholder="Nom de famille" required>
                 </div>
                 <div class="form-group">
                     <input type="email" name="email" placeholder="Email" required>

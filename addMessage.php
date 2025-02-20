@@ -25,30 +25,58 @@ if ($_POST) {
         header("Location: guestbook.php");
         exit;
     }
-
-    
 }
 $messages = $guestbook->getMessages();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Livre d'or</title>
+    <link rel="stylesheet" href="style/commentaire.css">
 </head>
-<body>
-    <h1>Livre d'or</h1>
 
-    <h2>Laissez un message</h2>
-    <form method="POST">
-        <div class="form-group">
-            <label for="name">Titre du commentaire</label>
-            <input type="text" name="name" id="name">
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="decorative-line">
+                <span>✧</span>
+                <span>❋</span>
+                <span>✧</span>
+            </div>
+            <h1>Livre d'or</h1>
+            <h2>Mariage de Conte Fées</h2>
+            <div class="date">22.7.2025</div>
+            <div class="decorative-line">
+                <span>✧</span>
+                <span>❋</span>
+                <span>✧</span>
+            </div>
         </div>
-        <textarea name="message" placeholder="Votre message" required></textarea>
-        <button type="submit">Envoyer</button>
-    </form>
+
+        <div class="content-box">
+            <h3 class="page-title">Laissez un message féerique</h3>
+    
+            <form method="POST">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="name">Titre du message</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Votre message enchanteur</label>
+                        <textarea id="message" name="message" placeholder="Partagez vos vœux magiques pour les mariés..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Envoyer vos vœux</button>
+                </form>
+        </div>
+
 
 </body>
+
 </html>

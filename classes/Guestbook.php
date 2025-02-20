@@ -18,10 +18,9 @@ class Guestbook {
     }
 
     public function getMessages() {
-        $stmt = $this->conn->query("SELECT g.*, u.username FROM guestbook g LEFT JOIN users u ON g.user_id = u.id ORDER BY g.created_at DESC");
+        $stmt = $this->conn->query("SELECT g.*, u.username, u.user_firstname AS firstname, u.user_lastname AS lastname FROM guestbook g LEFT JOIN users u ON g.user_id = u.id ORDER BY g.created_at DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
     public function getMessageById($id) {
         $stmt = $this->conn->prepare("SELECT * FROM guestbook WHERE id = :id");

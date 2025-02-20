@@ -16,8 +16,8 @@ class User
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
-    public function register($username, $email, $password)
+
+    /*public function register($username, $email, $first_name, $last_name, $password)
     {
         try {
             $stmt = $this->conn->prepare("SELECT 1 FROM users WHERE username = :username UNION SELECT 1 FROM users WHERE email = :email");
@@ -29,18 +29,46 @@ class User
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-
-            return $stmt->execute([
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, user_firstname, user_lastname, password) VALUES (:username, :email, :user_firstname, user_lastname, :password)");
+            $stmt->execute([
                 ':username' => htmlspecialchars($username),
                 ':email' => htmlspecialchars($email),
+                ':user_firstname' => htmlspecialchars($first_name),
+                ':user_lastname' => htmlspecialchars($last_name),
                 ':password' => $hashedPassword
             ]);
         } catch (PDOException $e) {
             return false;
         }
     }
+*/
 
+public function register($username, $email, $first_name, $last_name, $password)
+{
+    try {
+        $stmt = $this->conn->prepare("SELECT 1 FROM users WHERE username = :username UNION SELECT 1 FROM users WHERE email = :email");
+        $stmt->execute([':username' => $username, ':email' => $email]);
+
+        if ($stmt->fetch()) {
+            return false;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $this->conn->prepare("INSERT INTO users (username, email, user_firstname, user_lastname, password) VALUES (:username, :email, :user_firstname, :user_lastname, :password)");
+        $stmt->execute([
+            ':username' => htmlspecialchars($username),
+            ':email' => htmlspecialchars($email),
+            ':user_firstname' => htmlspecialchars($first_name),
+            ':user_lastname' => htmlspecialchars($last_name),
+            ':password' => $hashedPassword
+        ]);
+        return true;
+    } catch (PDOException $e) {
+        echo "Error in register method: " . $e->getMessage();
+        return false;
+    }
+}
     public function login($email, $password)
     {
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
@@ -56,7 +84,7 @@ class User
     }
 
 
-    
+
     public function updateUser($id, $username, $email)
     {
         try {

@@ -2,6 +2,7 @@
 include_once "session.php";
 require_once "classes/Database.php";
 require_once "classes/User.php";
+
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
@@ -38,7 +39,7 @@ if (isset($_GET['logout'])) {
                 <li><a href="index.php">Accueil</a></li>
                 <?php if ($user->isLoggedIn()) { ?>
                     <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
-                    <li><a href="guestbook.php">Livre d'or</a></li>
+                    <li><a href="guestbook2.php">Livre d'or</a></li>
                     <li><a href="logout.php">Se déconnecter</a></li>
 
 
@@ -63,6 +64,8 @@ if (isset($_GET['logout'])) {
 
     <section class="discover">
         <h2 class="section-title">Découvrir ✨</h2>
+        <p><?=var_dump($_SESSION);?>
+        </p>
         <p class="section-subtitle">✨ Une touche de magie pour un jour inoubliable ✨</p>
         <div class="discover-grid">
             <div class="discover-card">
