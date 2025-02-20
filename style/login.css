@@ -163,6 +163,37 @@ h2.connexion-title:after {
   background: linear-gradient(to right, transparent, #e0a5c0, transparent);
   margin: 10px auto 0;
 }
+select {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: rgba(253, 242, 246, 0.5);
+  border: 1px solid #e8cad7;
+  border-radius: 6px;
+  font-family: 'Alice', serif;
+  font-size: 16px;
+  color: #684550;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23684550" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #d397b1;
+  box-shadow: 0 0 8px rgba(224, 165, 192, 0.3);
+  background-color: #fff;
+}
+
+/* Style for option element */
+option {
+  font-family: 'Alice', serif;
+  font-size: 16px;
+  color: #684550;
+}
 
 .form-group {
   margin-bottom: 25px;
