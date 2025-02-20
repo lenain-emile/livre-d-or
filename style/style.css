@@ -500,3 +500,11 @@ table a:hover {
     display: none;
   }
  }
+
+ @media (min-width: 576px)
+ {
+  .mobile
+  {
+    display: none;
+  }
+ }
