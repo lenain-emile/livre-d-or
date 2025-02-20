@@ -35,13 +35,17 @@ class Guestbook {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateMessage($id, $message, $user_id) {
-        $stmt = $this->conn->prepare("UPDATE guestbook SET message = :message WHERE id = :id AND user_id = :user_id");
+    public function updateMessage($id, $name, $message) {
+        $stmt = $this->conn->prepare("UPDATE guestbook SET name = :name, message = :message WHERE id = :id");
         return $stmt->execute([
+            ':name' => htmlspecialchars($name),
             ':message' => htmlspecialchars($message),
-            ':id' => $id,
-            ':user_id' => $user_id
+            ':id' => $id
         ]);
+    }
+    public function deleteMessage($id) {
+        $stmt = $this->conn->prepare("DELETE FROM guestbook WHERE id = :id");
+        return $stmt->execute([':id' => $id]);
     }
 }
 ?>

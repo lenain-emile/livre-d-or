@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
             
             <h2 class="connexion-title">Inscription</h2>
             <?php if (isset($error)) echo "<p>$error</p>"; ?>   
-            <?php var_dump($_POST);?>
             <form method="POST">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="Nom d'utilisateur" required>
@@ -74,6 +73,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
         <div class="magic-sparkle sparkle3">✧</div>
         <div class="magic-sparkle sparkle4">✦</div>
     </div>
-    <?php var_dump($_SESSION)?>
 </body>
 </html>
