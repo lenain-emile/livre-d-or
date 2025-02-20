@@ -39,6 +39,8 @@ if (isset($_GET['logout'])) {
                 <?php if ($user->isLoggedIn()) { ?>
                     <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
                     <li><a href="guestbook.php">Livre d'or</a></li>
+                    <li><a href="logout.php">Se déconnecter</a></li>
+
 
                 <?php
                 } else {

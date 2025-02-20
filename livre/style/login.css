@@ -169,7 +169,7 @@ h2.connexion-title:after {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"], input[type="text"] {
   width: 100%;
   padding: 12px 15px;
   background-color: rgba(253, 242, 246, 0.5);
@@ -183,7 +183,7 @@ input[type="password"] {
 }
 
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus, input[type="text"]:focus {
   outline: none;
   border-color: #d397b1;
   box-shadow: 0 0 8px rgba(224, 165, 192, 0.3);
