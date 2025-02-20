@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Livre d'or Mariage de Conte Fées</title>
+    <title>Profil - Livre d'or Mariage de Conte Fées</title>
     <link rel="stylesheet" href="style/login.css">
 
 </head>
@@ -59,9 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
                 <button type="submit" class="btn-connect">Mettre à jour</button>
             </form>
 
-            <div class="signup-link">
-                Pas encore de compte ? <a href="Inscrivez-vous">Inscrivez-vous</a>
-            </div>
 
             <div class="heart-icon">♥</div>
             <div class="couple-names">Un mariage féerique AG & Leonardo Dicaprio</div>

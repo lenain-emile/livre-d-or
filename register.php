@@ -4,7 +4,6 @@ require_once "classes/User.php";
 
 $user = new User();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
     if ($user->register($_POST["username"], $_POST["email"], $_POST["password"])) {
         header("Location: login.php");
@@ -14,38 +13,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Livre d'or Mariage de Conte Fées</title>
+    <link rel="stylesheet" href="style/login.css">
+ 
 </head>
 <body>
-<header>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <?php if ($user->isLoggedIn()) { ?>
-                    <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
-                    <li><a href="guestbook.php">Livre d'or</a></li>
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Livre d'or</h1>
+            <h2>Mariage de Conte Fées</h2>
+            <h3>22.07.2025</h3>
+        </div>
 
-                <?php
-                } else {
-                ?>
-                    <li><a href="login.php">Se connecter</a></li>
-                    <li><a href="register.php">S'inscrire</a></li>
-                <?php } ?>
+        <div class="connexion-container">
+            <ul class="nav-list">
+                <li><a href="index.php">Accueil</a></li>
+                
             </ul>
-        </nav>
-    </header>
-    <h1>Inscription</h1>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Mot de passe" required>
-        <button type="submit">S'inscrire</button>
-    </form>
-    <p>Déjà un compte ? <a href="login.php">Connectez-vous</a></p>
+            
+            <h2 class="connexion-title">Inscription</h2>
+            <?php if (isset($error)) echo "<p>$error</p>"; ?>            
+            <form method="POST">
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="btn-connect">S'inscrire</button>
+            </form>
+            
+            <div class="signup-link">
+                Déjà un compte ? <a href="login.php">Connectez-vous</a>
+            </div>
+            
+            <div class="heart-icon">♥</div>
+            <div class="couple-names">Un mariage féerique AG & Leonardo Dicaprio</div>
+        </div>
+        
+        <div class="magic-sparkle sparkle1">✧</div>
+        <div class="magic-sparkle sparkle2">✦</div>
+        <div class="magic-sparkle sparkle3">✧</div>
+        <div class="magic-sparkle sparkle4">✦</div>
+    </div>
+    <?php var_dump($_SESSION)?>
 </body>
 </html>
