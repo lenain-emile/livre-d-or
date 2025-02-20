@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'] ?? null;
 ?>
 
 <header class="header">
-    <nav class="nav">
+    <nav class="nav desktop">
         <ul>
             <li>
                 <div class="logo">Livre d'or</div>
@@ -17,6 +17,33 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
                 <li><a href="guestbook.php">Livre d'or</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
+                <?php if($_SESSION['user_permissions'] == 2) { ?>
+                    <li><a href="admin.php">Administration</a></li>
+                <?php } ?>
+            <?php } else { ?>
+                <li><a href="login.php">Se connecter</a></li>
+                <li><a href="register.php">S'inscrire</a></li>
+            <?php } ?>
+        </ul>
+    </nav>
+
+    <nav class="nav mobile">
+        <div class="logo">Livre d'or</div>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+        <ul class="nav-list">
+            <li><a href="index.php">Accueil</a></li>
+            <?php if ($user->isLoggedIn()) { ?>
+                <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
+                <li><a href="guestbook.php">Livre d'or</a></li>
+                <li><a href="logout.php">Se déconnecter</a></li>
+                <?php if($_SESSION['user_permissions'] == 2) { ?>
+                    <li><a href="admin.php">Administration</a></li>
+                <?php } ?>
             <?php } else { ?>
                 <li><a href="login.php">Se connecter</a></li>
                 <li><a href="register.php">S'inscrire</a></li>

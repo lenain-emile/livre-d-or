@@ -39,7 +39,6 @@ if (isset($_GET['logout'])) {
 
     <section class="discover">
         <h2 class="section-title">Découvrir ✨</h2>
-        <p><?= var_dump($_SESSION); ?></p>
         <p class="section-subtitle">✨ Une touche de magie pour un jour inoubliable ✨</p>
         <div class="discover-grid">
             <div class="discover-card">

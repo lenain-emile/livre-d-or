@@ -41,20 +41,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
             <?php if (isset($error)) echo "<p>$error</p>"; ?>   
             <form method="POST">
                 <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
                     <input type="text" name="username" placeholder="Nom d'utilisateur" required>
                 </div>
 
                 <div class="form-group">
+                    <label for="firstname">Prénom</label>
                     <input type="text" name="firstname" placeholder="Prénom" required>
                 </div>
 
                 <div class="form-group">
+                    <label for="lastname">Nom de famille</label>
                     <input type="text" name="lastname" placeholder="Nom de famille" required>
                 </div>
                 <div class="form-group">
+                    <label for="email">Adresse email</label>
                     <input type="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-group">
+                    <label for="password">Mot de passe</label>
                     <input type="password" name="password" placeholder="Mot de passe" required>
                 </div>
                 <button type="submit" class="btn-connect">S'inscrire</button>

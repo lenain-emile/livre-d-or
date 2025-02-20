@@ -41,9 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["email"]) && !empty($_
             <?php if (isset($error)) echo "<p>$error</p>"; ?>            
             <form method="POST">
                 <div class="form-group">
+                    <label for="email">Adresse email</label>
                     <input type="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-group">
+                    <label for="password">Mot de passe</label>
                     <input type="password" name="password" placeholder="Mot de passe" required>
                 </div>
                 <button type="submit" class="btn-connect">Se connecter</button>
@@ -62,6 +64,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["email"]) && !empty($_
         <div class="magic-sparkle sparkle3">✧</div>
         <div class="magic-sparkle sparkle4">✦</div>
     </div>
-    <?php var_dump($_SESSION)?>
 </body>
 </html>
