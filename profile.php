@@ -11,8 +11,8 @@ $user = new User();
 $userData = $user->getUserById($_SESSION['user_id']);
 $user_id = $_SESSION['user_id'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"])) {
-    if ($user->updateUser($_SESSION['user_id'], $_POST["username"], $_POST["email"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["firstname"]) && !empty($_POST["lastname"])) {
+    if ($user->updateUser($_SESSION['user_id'], $_POST["username"], $_POST["email"], $_POST["firstname"], $_POST["lastname"])) {
         $success = "Profil mis à jour avec succès";
         $userData = $user->getUserById($_SESSION['user_id']); // Refresh user data
     } else {
@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil - Livre d'or Mariage de Conte Fées</title>
     <link rel="stylesheet" href="style/login.css">
-
 </head>
 
 <body>
@@ -43,11 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
         <div class="connexion-container">
             <ul class="nav-list">
                 <li><a href="index.php">Accueil</a></li>
-
             </ul>
 
             <h2 class="connexion-title">Mon profil</h2>
             <?php if (isset($error)) echo "<p>$error</p>"; ?>
+            <?php if (isset($success)) echo "<p>$success</p>"; ?>
             <form method="POST">
                 <div class="form-group">
                     <input type="text" name="username" value="<?php echo htmlspecialchars($userData['username']); ?>" required>
@@ -55,10 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
                 <div class="form-group">
                     <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($userData['email']); ?>" required>
                 </div>
-
+                <div class="form-group">
+                    <input type="text" name="firstname" placeholder="Prénom" value="<?php echo htmlspecialchars($userData['user_firstname']); ?>" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="lastname" placeholder="Nom" value="<?php echo htmlspecialchars($userData['user_lastname']); ?>" required>
+                </div>
                 <button type="submit" class="btn-connect">Mettre à jour</button>
             </form>
-
 
             <div class="heart-icon">♥</div>
             <div class="couple-names">Un mariage féerique AG & Leonardo Dicaprio</div>
@@ -69,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
         <div class="magic-sparkle sparkle3">✧</div>
         <div class="magic-sparkle sparkle4">✦</div>
     </div>
-    <?php var_dump($_SESSION) ?>
 </body>
 
 </html>
