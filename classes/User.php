@@ -52,21 +52,28 @@ class User
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['user_permissions'] = $user['user_permissions'];
             return true;
         }
         return false;
     }
 
+    public function getAllUsers()
+    {
+        $stmt = $this->conn->prepare("SELECT id, username, email, user_firstname, user_lastname FROM users");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-
-    public function updateUser($id, $username, $email, $firstname, $lastname) {
+    public function updateUser($id, $username, $email, $firstname, $lastname, $user_permissions) {
         try {
-            $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email, user_firstname = :firstname, user_lastname = :lastname WHERE id = :id");
+            $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email, user_firstname = :firstname, user_lastname = :lastname, user_permissions = :user_permissions WHERE id = :id");
             return $stmt->execute([
                 ':username' => htmlspecialchars($username),
                 ':email' => htmlspecialchars($email),
                 ':firstname' => htmlspecialchars($firstname),
                 ':lastname' => htmlspecialchars($lastname),
+                ':user_permissions' => $user_permissions,
                 ':id' => $id
             ]);
         } catch (PDOException $e) {
