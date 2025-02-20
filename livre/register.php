@@ -4,10 +4,7 @@ require_once "classes/User.php";
 
 $user = new User();
 
-if(!isset($_SESSION['username']))
-{
-    header('Location: guestbook.php');
-}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
     if ($user->register($_POST["username"], $_POST["email"], $_POST["password"])) {
         header("Location: login.php");
