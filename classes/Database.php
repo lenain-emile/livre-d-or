@@ -1,9 +1,11 @@
 <?php
-class Database {
+class Database
+{
     private static $instance = null;
     private $conn;
 
-    private function __construct() {
+    private function __construct()
+    {
         $host = "localhost";
         $dbname = "guestbook_db";
         $username = "root";
@@ -16,16 +18,17 @@ class Database {
             die("Erreur de connexion : " . $e->getMessage());
         }
     }
-
-    public static function getInstance() {
+    //If there is no instance, it will generate one
+    public static function getInstance()
+    {
         if (self::$instance == null) {
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn;
     }
 }
-?>

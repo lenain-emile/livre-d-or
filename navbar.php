@@ -17,7 +17,7 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
                 <li><a href="guestbook.php">Livre d'or</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
-                <?php if($_SESSION['user_permissions'] == 2) { ?>
+                <?php if ($_SESSION['user_permissions'] == 2) { ?>
                     <li><a href="admin.php">Administration</a></li>
                 <?php } ?>
             <?php } else { ?>
@@ -41,7 +41,7 @@ $user_id = $_SESSION['user_id'] ?? null;
                 <li><a href="profile.php?id=<?= $user_id ?>">Profil</a></li>
                 <li><a href="guestbook.php">Livre d'or</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
-                <?php if($_SESSION['user_permissions'] == 2) { ?>
+                <?php if ($_SESSION['user_permissions'] == 2) { ?>
                     <li><a href="admin.php">Administration</a></li>
                 <?php } ?>
             <?php } else { ?>

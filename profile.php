@@ -6,29 +6,29 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-
+//We get the logged user to check later if it's his own profile, or an admin 
 $user = new User();
 $logged_in_user_id = $_SESSION['user_id'];
 $userData = $user->getUserById($logged_in_user_id);
-$user_id = $_GET['id'] ?? $logged_in_user_id;
+$user_id = $_GET['id'] ?? $logged_in_user_id; 
 
 if ($user_id != $logged_in_user_id && $userData['user_permissions'] != 2) {
     header("Location: index.php");
     exit;
 }
-
+//We fetch the user data, so we can fill in the form
 $profileData = $user->getUserById($user_id);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["firstname"]) && !empty($_POST["lastname"])) {
+if ($_POST && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["firstname"]) && !empty($_POST["lastname"])) {
     $user_permissions = $profileData['user_permissions'];
     if ($userData['user_permissions'] == 2 && isset($_POST["user_permissions"])) {
         $user_permissions = $_POST["user_permissions"];
     }
 
-
+    //If the update went successfuly, we get the new values and fill in the form with updated data
     if ($user->updateUser($user_id, $_POST["username"], $_POST["email"], $_POST["firstname"], $_POST["lastname"], $user_permissions)) {
         $success = "Profil mis à jour avec succès";
-        $profileData = $user->getUserById($user_id); // Refresh user data
+        $profileData = $user->getUserById($user_id);
     } else {
         $error = "Erreur lors de la mise à jour du profil";
     }

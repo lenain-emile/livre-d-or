@@ -16,7 +16,7 @@
 <body>
     <main>
         <div class="container">
-            <h1>Accès Refusé</h1>
+            <h1>Accès refusé</h1>
             <p>Votre compte a été suspendu. Veuillez contacter l'administrateur pour plus d'informations.</p>
             <a href="index.php" class="btn">Retour à l'accueil</a>
         </div>

@@ -20,7 +20,7 @@ if ($user_id != $logged_in_user_id && $userData['user_permissions'] != 2) {
 
 $profileData = $user->getUserById($user_id);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["firstname"]) && !empty($_POST["lastname"])) {
+if ($_POST && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["firstname"]) && !empty($_POST["lastname"])) {
     $user_permissions = $profileData['user_permissions'];
     if ($userData['user_permissions'] == 2 && isset($_POST["user_permissions"])) {
         $user_permissions = $_POST["user_permissions"];

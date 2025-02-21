@@ -4,7 +4,7 @@ require_once "classes/User.php";
 
 $user = new User();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
+if ($_POST && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
     if ($user->register($_POST["username"], $_POST["email"], $_POST['firstname'], $_POST['lastname'], $_POST["password"])) {
         header("Location: login.php");
         exit;

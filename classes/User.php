@@ -39,7 +39,7 @@ class User
             ]);
             return true;
         } catch (PDOException $e) {
-            echo "Error in register method: " . $e->getMessage();
+            echo "Erreur :  " . $e->getMessage();
             return false;
         }
     }

@@ -1,13 +1,11 @@
 <?php
-// Include necessary files.
 include_once "session.php";
 require_once "classes/Database.php";
 require_once "classes/Guestbook.php";
 require_once "classes/User.php";
 
-// Get database connection instance.
+// Get database connection instance, and classes instances.
 $conn = Database::getInstance()->getConnection();
-// Create instances of the classes.
 $guestbook = new Guestbook();
 $user = new User();
 
@@ -21,13 +19,11 @@ if ($_POST) {
         exit;
     }
 }
-
+// Redirect suspended accounts to the denied page
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_info = $user->getUserById($user_id);
     $user_permissions = $user_info['user_permissions'];
-
-    // Redirect suspended accounts to the denied page
     if ($user_permissions == 0) {
         header("Location: denied.php");
         exit;
@@ -66,7 +62,7 @@ $messages = $guestbook->getMessages();
 
         <div class="content-box">
             <h3 class="page-title">Laissez un message féerique</h3>
-    
+
             <form method="POST">
                 <form method="POST">
                     <div class="form-group">
