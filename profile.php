@@ -24,6 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty
     if ($userData['user_permissions'] == 2 && isset($_POST["user_permissions"])) {
         $user_permissions = $_POST["user_permissions"];
     }
+
+
     if ($user->updateUser($user_id, $_POST["username"], $_POST["email"], $_POST["firstname"], $_POST["lastname"], $user_permissions)) {
         $success = "Profil mis à jour avec succès";
         $profileData = $user->getUserById($user_id); // Refresh user data

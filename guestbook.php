@@ -12,8 +12,10 @@ if ($_SESSION['user_id']) {
     $user_id = $_SESSION['user_id'];
     $user_info = $user->getUserById($user_id);
     $user_permissions = $user_info['user_permissions'];
-} else {
-    $user_permissions = 0; // Default to non-admin if not logged in
+    if($user_permissions == 0)
+    {
+        header("Location: denied.php");
+    }
 }
 
 $messages = $guestbook->getMessages();
