@@ -17,6 +17,7 @@ if ($user_id != $logged_in_user_id && $userData['user_permissions'] != 2) {
     exit;
 }
 
+
 $profileData = $user->getUserById($user_id);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["firstname"]) && !empty($_POST["lastname"])) {

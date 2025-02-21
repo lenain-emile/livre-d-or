@@ -13,14 +13,23 @@ $user = new User();
 
 if ($_POST) {
     if (!empty($_POST["message"])) {
-        // Get the user ID from the session, or null if not logged in.
         $user_id = $_SESSION['user_id'] ?? null;
 
-        // Add the message to the guestbook.
         $guestbook->addMessage($_POST["name"], $_POST["message"], $user_id);
 
-        // Redirect to the guestbook page.
         header("Location: guestbook.php");
+        exit;
+    }
+}
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $user_info = $user->getUserById($user_id);
+    $user_permissions = $user_info['user_permissions'];
+
+    // Redirect suspended accounts to the denied page
+    if ($user_permissions == 0) {
+        header("Location: denied.php");
         exit;
     }
 }
