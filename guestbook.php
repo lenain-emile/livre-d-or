@@ -2,12 +2,10 @@
 include_once "session.php";
 require_once "classes/Database.php";
 require_once "classes/Guestbook.php";
-require_once "classes/Reply.php";
 require_once "classes/User.php";
 
 $conn = Database::getInstance()->getConnection();
 $guestbook = new Guestbook();
-$reply = new Reply();
 $user = new User();
 
 if ($_SESSION['user_id']) {
@@ -63,7 +61,7 @@ if ($searchTerm) {
         <div class="search-container">
             <form method="GET" action="guestbook.php">
                 <input type="text" name="search" placeholder="Rechercher un message..." value="<?= @htmlspecialchars($searchTerm) ?>">
-                <button  type="submit">Rechercher</button>
+                <button class="btn-search" type="submit">Rechercher</button>
             </form>
         </div>
         <div class="container-link">

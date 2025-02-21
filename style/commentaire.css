@@ -31,6 +31,28 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(255, 139, 171, 0.3);
 }
+form
+{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5%;
+}
+
+.btn-search {
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(45deg, var(--secondary), var(--accent));
+    color: var(--light);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 139, 171, 0.3);
+    cursor: pointer;
+}
 
 .nav {
     max-width: 1400px;
@@ -342,3 +364,4 @@ textarea {
       display: none;
     }
    }
+   

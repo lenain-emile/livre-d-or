@@ -3,14 +3,12 @@
 include_once "session.php";
 require_once "classes/Database.php";
 require_once "classes/Guestbook.php";
-require_once "classes/Reply.php";
 require_once "classes/User.php";
 
 // Get database connection instance.
 $conn = Database::getInstance()->getConnection();
 // Create instances of the classes.
 $guestbook = new Guestbook();
-$reply = new Reply();
 $user = new User();
 
 if ($_POST) {
