@@ -29,7 +29,11 @@ class Guestbook {
     }
 
     public function getMessagesByMessageContent($searchTerm) {
-        $sql = "SELECT g.*, u.username FROM guestbook g LEFT JOIN users u ON g.user_id = u.id WHERE g.message LIKE :searchTerm ORDER BY g.created_at DESC";
+        $sql = "SELECT g.*, u.username, u.user_firstname AS firstname, u.user_lastname AS lastname 
+                FROM guestbook g 
+                LEFT JOIN users u ON g.user_id = u.id 
+                WHERE g.message LIKE :searchTerm OR g.name LIKE :searchTerm 
+                ORDER BY g.created_at DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':searchTerm' => '%' . $searchTerm . '%']); 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
