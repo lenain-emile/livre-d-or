@@ -60,7 +60,12 @@ if ($searchTerm) {
                 <span>✧</span>
             </div>
         </div>
-
+        <div class="search-container">
+            <form method="GET" action="guestbook.php">
+                <input type="text" name="search" placeholder="Rechercher un message..." value="<?= @htmlspecialchars($searchTerm) ?>">
+                <button  type="submit">Rechercher</button>
+            </form>
+        </div>
         <div class="container-link">
             <a class="btn" href="addMessage.php?id=<?= $user_id ?>">Laissez un message féerique</a>
         </div>
